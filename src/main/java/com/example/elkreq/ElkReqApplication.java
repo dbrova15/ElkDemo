@@ -17,6 +17,7 @@ public class ElkReqApplication {
 //
 //        RequestClazz request = new RequestClazz();
 //        RequestClazz.get(baseUrl, Employee.class);
+        Employee res = ElkPush.getReq();
         ElkPush.postReq();
     }
 

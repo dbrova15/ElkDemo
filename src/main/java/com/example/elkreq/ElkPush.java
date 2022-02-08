@@ -16,10 +16,7 @@ public class ElkPush {
 
     }
 
-    public static void postReq() {
-        WebClient webClient = WebClient.create();
-//        String baseUrl = "http://dummy.restapiexample.com/api/v1/create";
-        String baseUrl = "http://127.0.0.1:9995/post";
+    private static Employee createEmployee() {
         DataEmp dataEmp = new DataEmp()
                 .setEmployee_age(25)
                 .setEmployee_name("Kel")
@@ -27,10 +24,30 @@ public class ElkPush {
                 .setId(12)
                 .setProfile_image("sdlkndslkndsnkl");
 
-        Employee empl = new Employee()
+        return new Employee()
                 .setSuccess("OK")
                 .setMessage("I'm OK")
                 .setData(dataEmp);
+    }
+
+    public static Employee getReq() {
+        String url = "http://dummy.restapiexample.com/api/v1/employee/1";
+        WebClient webClient = WebClient.create();
+
+        return  webClient
+                        .get()
+                        .uri(url)
+                        .retrieve()
+                        .bodyToMono(Employee.class)
+                        .block();
+    }
+
+    public static void postReq() {
+        WebClient webClient = WebClient.create();
+        String baseUrl = "http://dummy.restapiexample.com/api/v1/create";
+//        String baseUrl = "http://127.0.0.1:9995/post";
+
+        Employee empl = createEmployee();
 
         Employee r = webClient.post()
                 .uri(baseUrl)
